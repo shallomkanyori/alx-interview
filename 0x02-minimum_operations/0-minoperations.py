@@ -15,6 +15,12 @@ def minOperations(n: int) -> int:
     characters in the file.
     """
 
+    if not isinstance(n, int):
+        raise TypeError("N must be an int")
+
+    if n <= 0:
+        return 0
+
     dp = [float('inf')] * (n + 1)
     dp[1] = 0
 
