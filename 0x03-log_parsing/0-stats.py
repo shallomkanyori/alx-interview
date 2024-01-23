@@ -40,24 +40,25 @@ if __name__ == "__main__":
     codes = {"200": 0, "301": 0, "400": 0, "401": 0,
              "403": 0, "404": 0, "405": 0, "500": 0}
 
-    line_format = (r'^\d+\.\d+\.\d+\.\d+ - \[.*?\] '
-                   r'"GET /projects/260 HTTP/1.1" '
-                   r'(\d+) (\d+)$')
-
     try:
         for line in sys.stdin:
-            m = re.match(line_format, line)
+            tokens = line.split()
 
-            if not m:
-                continue
+            try:
+                total_size += int(tokens[-1])
+            except (IndexError, ValueError):
+                pass
 
-            total_size += int(m[2])
-
-            codes[m[1]] += 1
+            try:
+                codes[tokens[-2]] += 1
+            except (KeyError, IndexError):
+                pass
 
             lines += 1
             if lines % 10 == 0:
                 print_stats(total_size, codes)
+
+        print_stats(total_size, codes)
 
     except KeyboardInterrupt:
         print_stats(total_size, codes)
