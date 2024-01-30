@@ -29,10 +29,6 @@ def validUTF8(data):
             expected_length = 3
         elif data[i] & 0b11111000 == 0b11110000:
             expected_length = 4
-        elif data[i] & 0b11111100 == 0b11111000:
-            expected_length = 5
-        elif data[i] & 0b11111110 == 0b11111100:
-            expected_length = 6
         else:
             return False
 
