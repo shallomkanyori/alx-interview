@@ -21,7 +21,7 @@ def validUTF8(data):
     # Try to match the length of the character based on the most significant
     # bits
     for i in range(len(data)):
-        if data[i] & 0b100000000 == 0b00000000:
+        if data[i] & 0b10000000 == 0b00000000:
             expected_length = 1
         elif data[i] & 0b11100000 == 0b11000000:
             expected_length = 2
