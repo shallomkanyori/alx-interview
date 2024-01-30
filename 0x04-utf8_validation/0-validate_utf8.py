@@ -13,6 +13,9 @@ def validUTF8(data):
         data (list of int): The data set.
     """
 
+    if not type(data) is list or not all(type(x) is int for x in data):
+        return
+
     expected_length = 0
 
     # Try to match the length of the character based on the most significant
