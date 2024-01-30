@@ -14,33 +14,27 @@ def validUTF8(data):
     """
 
     if (not type(data) is list or
-            not all(type(x) is int and x >= 0 for x in data)):
+            not all(type(x) is int for x in data)):
         return False
 
-    expected_length = 0
+    count = 0
 
     # Try to match the length of the character based on the most significant
     # bits
-    for i in range(len(data)):
-        if data[i] & 0b10000000 == 0b00000000:
-            expected_length = 1
-        elif data[i] & 0b11100000 == 0b11000000:
-            expected_length = 2
-        elif data[i] & 0b11110000 == 0b11100000:
-            expected_length = 3
-        elif data[i] & 0b11111000 == 0b11110000:
-            expected_length = 4
+    for i in data:
+        if count == 0:
+            if i >> 5 == 0b110 or i >> 5 == 0b1110:
+                count = 1
+            elif i >> 4 == 0b1110:
+                count = 2
+            elif i >> 3 == 0b11110:
+                count = 3
+            elif i >> 7 == 0b1:
+                return False
         else:
-            return False
-
-        expected_length -= 1
-        while expected_length > 0:
-            i += 1
-
-            if i >= len(data):
+            if i >> 6 != 0b10:
                 return False
 
-            if data[i] & 0b11000000 != 0b10000000:
-                return False
+            count -= 1
 
-    return True
+    return count == 0
