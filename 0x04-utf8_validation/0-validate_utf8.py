@@ -13,8 +13,9 @@ def validUTF8(data):
         data (list of int): The data set.
     """
 
-    if not type(data) is list or not all(type(x) is int for x in data):
-        return
+    if (not type(data) is list or
+            not all(type(x) is int and x >= 0 for x in data)):
+        return False
 
     expected_length = 0
 
