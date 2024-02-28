@@ -17,18 +17,20 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    # dp[i] == The minimum number of coins to make i
-    dp = [total + 1] * (total + 1)
-    dp[0] = 0
+    i = 0
+    res = 0
+    rem = total
+    n = len(coins)
+    coins_sorted = sorted(coins, reverse=True)
 
-    for i in range(total + 1):
-        for c in coins:
-            if c > i:
-                continue
+    while rem > 0:
+        if i >= n:
+            return -1
 
-            dp[i] = min(dp[i], dp[i - c] + 1)
+        if rem - coins_sorted[i] >= 0:
+            rem -= coins_sorted[i]
+            res += 1
+        else:
+            i += 1
 
-    if dp[total] > total:
-        return -1
-
-    return dp[total]
+    return res
