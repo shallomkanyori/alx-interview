@@ -51,7 +51,6 @@ def isWinner(x, nums):
             ben += 1
         else:
             maria += 1
-        print(f"{sieve=}\n{primes=}\n{ben=},{maria=}\n")
 
     if ben == maria:
         return None
