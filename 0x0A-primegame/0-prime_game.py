@@ -10,6 +10,9 @@ def isWinner(x, nums):
         nums (list of int): The end of the number range for each round.
     """
 
+    if x <= 0:
+        return None
+
     maria = 0
     ben = 0
 
