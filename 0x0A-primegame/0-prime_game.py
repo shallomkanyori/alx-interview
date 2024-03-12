@@ -1,15 +1,5 @@
 #!/usr/bin/python3
-"""Solution for Prime game
-
-Prime game:
-Maria and Ben are playing a game. Given a set of consecutive integers starting
-from 1 up to and including n, they take turns choosing a prime number from the
-set and removing that number and its multiples from the set. The player that
-cannot make a move loses the game.
-They play x rounds of the game, where n may be different for each round.
-Assuming Maria always goes first and both players play optimally, determine
-who the winner of each game is.
-"""
+"""Solution for Prime game"""
 
 
 def isWinner(x, nums):
@@ -17,7 +7,7 @@ def isWinner(x, nums):
 
     Args:
         x (int): The number of rounds played.
-        nums (list of int): The array of n for each round(see description).
+        nums (list of int): The end of the number range for each round.
     """
 
     maria = 0
